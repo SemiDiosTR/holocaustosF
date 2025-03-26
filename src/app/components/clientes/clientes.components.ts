@@ -54,11 +54,12 @@ toggleForm(): void {
     this.textoModal = "Nuevo cliente";
     this.isEditMode = false;
     this.selectedCliente = null;
+    /* con reset vamos a hacer que el formulario quede en limpio */
     this.clientesForm.reset();
 
   }
 
-  onSubmit(): void {
+  crearCliente(): void {
     if (this.clientesForm.invalid) {
       return;
     }
@@ -74,8 +75,8 @@ toggleForm(): void {
               this.clientes[index] = updateCliente;
             }
             Swal.fire({
-              title: "Cliente" + updateCliente.nombre + "actualizada",
-              text: "El cliente fue actualizada exitosamente",
+              title: updateCliente.nombre + " actualizada",
+              text: "El cliente fue actualizado exitosamente",
               icon: "success"
             });
           }, error: (error) => {
@@ -123,7 +124,7 @@ mostrarErrores(errorResponse: any): void {
 
   editCliente(cliente: Clientes) {
     this.selectedCliente = cliente;
-    this.textoModal = "Editando Aerolinea" + cliente.nombre;
+    this.textoModal = cliente.nombre;
     this.isEditMode = true;
     this.showForm = true;
 
@@ -140,8 +141,8 @@ mostrarErrores(errorResponse: any): void {
 
   deleteCliente(idCliente: number) {
     Swal.fire({
-      title: "Eliminar aerolinea",
-      text: "Esta seguro que deseas eliminar la aerolinea",
+      title: "Eliminar cliente",
+      text: "Esta seguro de eliminar al cliente",
       icon: "question",
       showConfirmButton:true,
       showCancelButton:true
@@ -152,7 +153,7 @@ mostrarErrores(errorResponse: any): void {
             this.clientes=this.clientes.filter(a=>a.idCliente!==idCliente);
             Swal.fire({
               title: "Cliente Eliminada",
-              text:"El cliente fue eliminada exitosamnete",
+              text:"El cliente fue eliminado con exito",
               icon: "success"
             });
 

@@ -12,7 +12,7 @@ import { Clientes } from '../models/clientes.model';
 export class ClientesService {
 
 
-    private apiUrl: string = environment.apiClientes;
+    private apiUrl: string = environment.apiUrl + 'clientes/';
   constructor(private http: HttpClient){ }
     getCliente():Observable<Clientes[]>{
       return this.http.get<Clientes[]>(this.apiUrl);

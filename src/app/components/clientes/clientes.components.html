@@ -5,20 +5,21 @@
   <table class="styled-table" class="custom-table" class="table table-hover table-striped table-bordered text-center">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>#</th>
+        <!-- <th>ID</th> -->
         <th>Nombre</th>
         <th>Apellido</th>
         <th>Email</th>
         <th>Telefono</th>
         <th>Direccion</th>
-        <th>Opciones</th>
+        <th>Acciones</th>
       </tr>
     </thead>
-  
-  
+
     <tbody>
       <tr *ngFor="let cliente of clientes; let i =index" style="text-align: center;" >
-        <td>{{ cliente.idCliente}}</td>
+        <td>{{i+1}}</td>
+        <!-- <td hidden>{{ cliente.idCliente}}</td> -->
         <td>{{ cliente.nombre }}</td>
         <td>{{ cliente.apellido}}</td>
         <td>{{ cliente.email}}</td>
@@ -26,10 +27,10 @@
         <td>{{ cliente.direccion}}</td>
 
         <td>
-          <button class="btn btn-success" (click)="editCliente(cliente)">
+          <button class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editClient" (click)="editCliente(cliente)">
             <i class="fas fa-edit"></i>Editar
           </button>
-          <button type="button" class="btn btn-danger" (click)="cliente.idCliente ? deleteCliente(cliente.idCliente):null"><i class="fas fa-trash"></i>Eliminar</button>
+          <button class="btn btn-danger" (click)="cliente.idCliente ? deleteCliente(cliente.idCliente):null"><i class="fas fa-trash"></i>Eliminar</button>
         </td>
       </tr>
     </tbody>
@@ -37,13 +38,8 @@
 </div>
   
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button> -->
-
 <!-- Modal -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,51 +49,54 @@
      
 
       <div *ngIf="showForm" style="margin-top: 20px;">
-       
-        <form [formGroup]="clientesForm" (ngSubmit)="onSubmit()">
-          <input hidden formControlName="id" readonly>
-          <div class="formGroup">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" class="form-control" formControlName="nombre"
-            pattern="^\S.*$" placeholder="Nombre">
-      
-          </div>
-          <div class="formGroup">
+
+        <form [formGroup]="clientesForm" (ngSubmit)="crearCliente()">
+          <input type="hidden" formControlName="idCliente" readonly>
+            <div class="formGroup">
             <label for="apellido">Apellido</label>
             <input id="apellido" class="form-control" formControlName="apellido"
-            pattern="^\S.*$" placeholder="apellido">
+              placeholder="apellido">
       
-          </div>
-         
-          <div class="formGroup">
-            <label for="direccion">Direccion</label>
-            <input id="direccion" class="form-control" formControlName="direccion"
-            pattern="^\S.*$" placeholder="direccion">
-          </div>
-    
+            <div class="formGroup">
+              <label for="direccion">Direccion</label>
+              <input id="direccion" class="form-control" formControlName="direccion"
+              placeholder="direccion">
+            </div>
+      
+            
           <div class="formGroup">
             <label for="email">Email</label>
             <input id="email" class="form-control" formControlName="email"
             pattern="^\S.*$" placeholder="email">
           </div>
-    
+      
+          </div>
+          <div class="formGroup">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" class="form-control" formControlName="nombre"
+            placeholder="Nombre">
+          </div>
+      
           <div class="formGroup">
             <label for="telefono">Telefono</label>
             <input id="telefono" class="form-control" formControlName="telefono"
             pattern="^\S.*$" placeholder="telefono">
           </div>
+      
+          <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="clientesForm.invalid"
+          style="margin-top: 20px;" >Guardar</button>
         </form>
-
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="clientesForm.invalid"
-        style="margin-top: 20px;" >Guardar</button>
+        <div>
+          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+        
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
-<div *ngIf="showForm" style="margin-top: 20px;">
+
+<!-- <div *ngIf="showForm" style="margin-top: 20px;">
 
   <form [formGroup]="clientesForm" (ngSubmit)="onSubmit()">
     <input hidden formControlName="idCliente" readonly>
@@ -135,7 +134,7 @@
     <button type="submit" class="btn btn-success"  [disabled]="clientesForm.invalid"
           style="margin-top: 20px;" >Guardar</button>
   </form>
-</div>
+</div> -->
   
 
 

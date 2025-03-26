@@ -7,7 +7,8 @@ import { NavbarComponent } from './components/commons/navbar/navbar.component';
 import { ClientesComponent } from './components/clientes/clientes.components';
 import { ReactiveFormsModule } from '@angular/forms';  
 import { provideHttpClient } from '@angular/common/http';
-import { MatTableModule } from '@angular/material/table';
+//import { MatTableModule } from '@angular/material/table';
+
 
 
 @NgModule({
@@ -17,13 +18,11 @@ import { MatTableModule } from '@angular/material/table';
     AppComponent
   ],
   imports: [
-    MatTableModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
   providers: [
-
     provideHttpClient()
   ],
   bootstrap: [AppComponent]

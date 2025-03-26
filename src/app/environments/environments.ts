@@ -10,6 +10,6 @@ export const environment={
     //traer datos por medio apigateway
     /* apiUrl:'http://localhost:8090/api/' */
 
-    apiClientes:'http://localhost:8081/',
+    /* apiClientes:'http://localhost:8082/', */
     apiUrl:'http://localhost:8090/api/'
 }
