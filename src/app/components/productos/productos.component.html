@@ -1,1 +1,86 @@
-<p>productos works!</p>
+
+<div>
+    <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editProducto" (click)="toggleForm()">Registrar</button>
+</div>
+
+<h1>Productos</h1>
+<div class="table-container">
+  <table class="styled-table" class="custom-table" class="table table-hover table-striped table-bordered text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <!-- <th>ID</th> -->
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Precio</th>
+        <th>Stock</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let producto of productos; let i =index" style="text-align: center;" >
+        <td>{{i+1}}</td>
+        <td>{{ producto.nombre }}</td>
+        <td>{{ producto.descripcion}}</td>
+        <td>{{ producto.precio}}</td>
+        <td>{{ producto.stock}}</td>
+
+        <td>
+          <button class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editProducto" (click)="editProducto(producto)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-danger" (click)="producto.idProducto ? deleteProducto(producto.idProducto):null"><i class="fas fa-trash" ></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
+
+ 
+
+<div class="modal fade" tabindex="-1" id="editProducto"> 
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{textoModal}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- <div *ngIf="showForm" style="margin-top: 20px;"> -->
+          <div style="margin-top: 20px;">
+          <form [formGroup]="productosForm" (ngSubmit)="crearProducto()">
+
+            <input hidden formControlName="idProducto" readonly>
+
+            <div class="formGroup">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre">
+            </div>
+
+            <div class="formGroup">
+              <label for="descripcion">Descripcion</label>
+              <input id="descripcion" class="form-control" formControlName="descripcion" placeholder="descripcion">
+            </div>
+  
+            <div class="formGroup">
+              <label for="precio">Precio</label>
+              <input id="precio" class="form-control" formControlName="precio" placeholder="productos">
+            </div>
+  
+            <div class="formGroup">
+              <label for="stock">Stock</label>
+              <input id="stock" class="form-control" formControlName="stock" placeholder="stock">
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="productosForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

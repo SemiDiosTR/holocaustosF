@@ -1,5 +1,5 @@
 export interface Pedidos{
-    id: number | null;
+    idPedido: number | null;
     cliente: string;
     lista_producto: string;
     total: String;

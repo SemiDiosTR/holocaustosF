@@ -1,0 +1,45 @@
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #e9e6e6;
+    text-align: center;
+    margin-top: 20px;
+    font-family: "Poppins", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+/* Subrayado animado */
+h1::after {
+    content: "";
+    display: block;
+    width: 50%;
+    height: 4px;
+    background-color: #4ecaec;
+    margin: 8px auto 0;
+    position: relative;
+    animation: underlineMove 2s ease-in-out infinite alternate;
+}
+
+/* Animación de movimiento */
+@keyframes underlineMove {
+    from {
+        transform: translateX(-50px);
+    }
+    to {
+        transform: translateX(30px);
+    }
+}
+
+a{
+  color: #4ecaec;
+}
+.position{
+  font-size: 20px;
+  justify-content: right;
+  
+}
+  
+
+  

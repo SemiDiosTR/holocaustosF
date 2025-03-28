@@ -5,22 +5,30 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/commons/navbar/navbar.component';
 import { ClientesComponent } from './components/clientes/clientes.components';
+import { ProductosComponent } from './components/productos/productos.component';
 import { ReactiveFormsModule } from '@angular/forms';  
 import { provideHttpClient } from '@angular/common/http';
-//import { MatTableModule } from '@angular/material/table';
+import { PedidiosComponent } from './components/pedidios/pedidios.component';
+
+/* import { MatTableModule } from '@angular/material/table';  */
+
 
 
 
 @NgModule({
   declarations: [
-    NavbarComponent,
+    AppComponent,
     ClientesComponent,
-    AppComponent
+    ProductosComponent,
+    NavbarComponent,
+    PedidiosComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   /*  MatTableModule,  */
   ],
   providers: [
     provideHttpClient()

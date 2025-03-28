@@ -1,6 +1,9 @@
+ 
 <div>
-    <button type="button" class="btn btn-primary" (click)="toggleForm()">Registrar</button>
+    <button class="btn btn-primary"  (click)="toggleForm()" data-bs-toggle="modal" data-bs-target="#editClient">Registrar</button>
 </div>
+
+<h1>Clientes</h1>
 <div class="table-container">
   <table class="styled-table" class="custom-table" class="table table-hover table-striped table-bordered text-center">
     <thead>
@@ -12,7 +15,7 @@
         <th>Email</th>
         <th>Telefono</th>
         <th>Direccion</th>
-        <th>Acciones</th>
+        <th>Opciones</th>
       </tr>
     </thead>
 
@@ -20,6 +23,7 @@
       <tr *ngFor="let cliente of clientes; let i =index" style="text-align: center;" >
         <td>{{i+1}}</td>
         <!-- <td hidden>{{ cliente.idCliente}}</td> -->
+        <!-- <td inert>{{ cliente.idCliente}}</td> -->
         <td>{{ cliente.nombre }}</td>
         <td>{{ cliente.apellido}}</td>
         <td>{{ cliente.email}}</td>
@@ -27,10 +31,15 @@
         <td>{{ cliente.direccion}}</td>
 
         <td>
-          <button class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editClient" (click)="editCliente(cliente)">
-            <i class="fas fa-edit"></i>Editar
+          <button class="btn btn-success me-1" 
+          data-bs-toggle="modal" 
+          data-bs-target="#editClient" 
+          (click)="editCliente(cliente)">
+            <i class="fas fa-edit"></i>
           </button>
-          <button class="btn btn-danger" (click)="cliente.idCliente ? deleteCliente(cliente.idCliente):null"><i class="fas fa-trash"></i>Eliminar</button>
+          <button class="btn btn-danger" 
+          (click)="cliente.idCliente ? deleteCliente(cliente.idCliente):null">
+          <i class="fas fa-trash"></i></button>
         </td>
       </tr>
     </tbody>
@@ -38,104 +47,53 @@
 </div>
   
 
-<!-- Modal -->
-<div class="modal fade" id="editClient" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" tabindex="-1" id="editClient"> 
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">{{textoModal}}</h1>
+        <h5 class="modal-title">{{textoModal}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-     
+      <div class="modal-body">
+        <!-- <div *ngIf="showForm" style="margin-top: 20px;"> -->
+          <div style="margin-top: 20px;">
+          <form [formGroup]="clientesForm" (ngSubmit)="crearCliente()">
 
-      <div *ngIf="showForm" style="margin-top: 20px;">
+            <input hidden formControlName="idCliente" readonly>
 
-        <form [formGroup]="clientesForm" (ngSubmit)="crearCliente()">
-          <input type="hidden" formControlName="idCliente" readonly>
             <div class="formGroup">
-            <label for="apellido">Apellido</label>
-            <input id="apellido" class="form-control" formControlName="apellido"
-              placeholder="apellido">
-      
-            <div class="formGroup">
-              <label for="direccion">Direccion</label>
-              <input id="direccion" class="form-control" formControlName="direccion"
-              placeholder="direccion">
+              <label for="nombre">Nombre</label>
+              <input id="nombre" class="form-control" formControlName="nombre" placeholder="Nombre">
             </div>
-      
+
+            <div class="formGroup">
+              <label for="apellido">Apellido</label>
+              <input id="apellido" class="form-control" formControlName="apellido" placeholder="Apellido">
+            </div>
+  
+            <div class="formGroup">
+              <label for="email">Email</label>
+              <input id="email" class="form-control" formControlName="email" placeholder="Email">
+            </div>
+  
+            <div class="formGroup">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" class="form-control" formControlName="telefono" placeholder="Teléfono">
+            </div>
+  
+            <div class="formGroup">
+              <label for="direccion">Dirección</label>
+              <input id="direccion" class="form-control" formControlName="direccion" placeholder="Dirección">
+            </div>
             
-          <div class="formGroup">
-            <label for="email">Email</label>
-            <input id="email" class="form-control" formControlName="email"
-            pattern="^\S.*$" placeholder="email">
-          </div>
-      
-          </div>
-          <div class="formGroup">
-            <label for="nombre">Nombre</label>
-            <input id="nombre" class="form-control" formControlName="nombre"
-            placeholder="Nombre">
-          </div>
-      
-          <div class="formGroup">
-            <label for="telefono">Telefono</label>
-            <input id="telefono" class="form-control" formControlName="telefono"
-            pattern="^\S.*$" placeholder="telefono">
-          </div>
-      
-          <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="clientesForm.invalid"
-          style="margin-top: 20px;" >Guardar</button>
-        </form>
-        <div>
-          <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <button type="submit" class="btn btn-primary" [disabled]="clientesForm.invalid" data-bs-dismiss="modal">Guardar</button>
+            </div>
+          </form>
+
         </div>
-        
       </div>
     </div>
   </div>
 </div>
-
-
-<!-- <div *ngIf="showForm" style="margin-top: 20px;">
-
-  <form [formGroup]="clientesForm" (ngSubmit)="onSubmit()">
-    <input hidden formControlName="idCliente" readonly>
-      <div class="formGroup">
-      <label for="apellido">Apellido</label>
-      <input id="apellido" class="form-control" formControlName="apellido"
-        placeholder="apellido">
-
-      <div class="formGroup">
-        <label for="direccion">Direccion</label>
-        <input id="direccion" class="form-control" formControlName="direccion"
-        placeholder="direccion">
-      </div>
-
-      
-    <div class="formGroup">
-      <label for="email">Email</label>
-      <input id="email" class="form-control" formControlName="email"
-      pattern="^\S.*$" placeholder="email">
-    </div>
-
-    </div>
-    <div class="formGroup">
-      <label for="nombre">Nombre</label>
-      <input id="nombre" class="form-control" formControlName="nombre"
-      placeholder="Nombre">
-    </div>
-
-    <div class="formGroup">
-      <label for="telefono">Telefono</label>
-      <input id="telefono" class="form-control" formControlName="telefono"
-      pattern="^\S.*$" placeholder="telefono">
-    </div>
-
-    <button type="submit" class="btn btn-success"  [disabled]="clientesForm.invalid"
-          style="margin-top: 20px;" >Guardar</button>
-  </form>
-</div> -->
-  
-
-
-

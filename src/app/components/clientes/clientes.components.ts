@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
   standalone: false,
   styleUrls:['./clientes.components.css'],
   templateUrl: './clientes.components.html',
-
 })
 
 export class ClientesComponent{
@@ -24,7 +23,7 @@ export class ClientesComponent{
 constructor(private clienteService: ClientesService
     , private formBuilder: FormBuilder
   ) {
-    this.clientesForm = formBuilder.group({
+    this.clientesForm = this.formBuilder.group({
       idCliente: [null],
       apellido: ['', [Validators.required, Validators.maxLength(50)]],
       direccion: ['', [Validators.required, Validators.maxLength(50)]],
@@ -48,48 +47,52 @@ ngOnInit(): void {
       }
     })
   }
-
-toggleForm(): void {
+  
+  toggleForm(): void {
     this.showForm = !this.showForm;
     this.textoModal = "Nuevo cliente";
     this.isEditMode = false;
     this.selectedCliente = null;
     /* con reset vamos a hacer que el formulario quede en limpio */
     this.clientesForm.reset();
-
+    
   }
-
+  
   crearCliente(): void {
     if (this.clientesForm.invalid) {
       return;
+      
     }
 
-/*     en Clientes priviene de la interfaz en donde se recibiran los datos */
+/*     en Clientes proviene de la interfaz en donde se recibiran los datos */
     const clienteData: Clientes = this.clientesForm.value;
-
+    
+    /* console.log("validar guardar", this.crearCliente) */
+    console.log("guardar crearCliente", clienteData)
     if (this.isEditMode) {
-        this.clienteService.updateCliente(clienteData).subscribe({
-          next: (updateCliente) => {
-            const index = this.clientes.findIndex(a => a.idCliente === clienteData.idCliente);
-            if (index !== -1) {
-              this.clientes[index] = updateCliente;
-            }
-            Swal.fire({
-              title: updateCliente.nombre + " actualizada",
-              text: "El cliente fue actualizado exitosamente",
-              icon: "success"
-            });
-          }, error: (error) => {
-            this.mostrarErrores(error);
+      this.clienteService.updateCliente(clienteData).subscribe({
+        next: (updateCliente) => {
+          const index = this.clientes.findIndex(a => a.idCliente === clienteData.idCliente);
+          if (index !== -1) {
+            this.clientes[index] = updateCliente;
           }
-        });
-      } else {
-        this.clienteService.createCliente(clienteData).subscribe({
-          next: (newCliente) => {
-            Swal.fire({
-              title: "Cliente" + newCliente.nombre + " creada",
-              text: "El cliente fue creada exitosamente",
-              icon: "success"
+          Swal.fire({
+            title: updateCliente.nombre + " actualizada",
+            text: "El cliente fue actualizado exitosamente",
+            icon: "success"
+          });
+          
+        }, error: (error) => {
+          this.mostrarErrores(error);
+        }
+      });
+    } else {
+      this.clienteService.createCliente(clienteData).subscribe({
+        next: (newCliente) => {
+          Swal.fire({
+            title: "Cliente" + newCliente.nombre + " creada",
+            text: "El cliente fue creada exitosamente",
+            icon: "success"
             });
             this.clientes.push(newCliente);
         }, error: (error) => {
@@ -100,6 +103,7 @@ toggleForm(): void {
     }
     this.showForm = false;
     this.clientesForm.reset();
+    
 
 
 }
@@ -124,7 +128,7 @@ mostrarErrores(errorResponse: any): void {
 
   editCliente(cliente: Clientes) {
     this.selectedCliente = cliente;
-    this.textoModal = cliente.nombre;
+    this.textoModal = " Editando Cliente: " + cliente.nombre;
     this.isEditMode = true;
     this.showForm = true;
 
@@ -135,7 +139,6 @@ mostrarErrores(errorResponse: any): void {
       email: cliente.email,
       telefono: cliente.telefono,
       direccion: cliente.direccion,
-
     })
   }
 
@@ -149,10 +152,10 @@ mostrarErrores(errorResponse: any): void {
     }).then(resp=>{
       if(resp.isConfirmed){
         this.clienteService.deleteCliente(idCliente).subscribe({
-          next:(deleteAerolinea)=>{
+          next:(deleteCliente)=>{
             this.clientes=this.clientes.filter(a=>a.idCliente!==idCliente);
             Swal.fire({
-              title: "Cliente Eliminada",
+              title: "Cliente Eliminado",
               text:"El cliente fue eliminado con exito",
               icon: "success"
             });
