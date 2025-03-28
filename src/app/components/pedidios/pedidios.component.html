@@ -1,1 +1,39 @@
-<p>pedidios works!</p>
+<div>
+    <button class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#editProducto">Registrar</button>
+</div>
+
+<h1>Pedidos</h1>
+<div class="table-container">
+  <table class="styled-table" class="custom-table" class="table table-hover table-striped table-bordered text-center">
+    <thead> 
+      <tr>
+        <th>#</th>
+        <!-- <th>ID</th> -->
+        <th>Cliente</th>
+        <th>Productos</th>
+        <th>Total</th>
+        <th>Fecha de creacion</th>
+        <th>Estado</th><!--  estado: pediente, enviado, entregado, cancelado -->
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let pedido of pedidos; let i =index" style="text-align: center;" >
+        <td>{{i+1}}</td>
+        <td>{{ pedido.cliente}}</td>
+        <td>{{ pedido.lista_producto}}</td>
+        <td>{{ pedido.total}}</td>
+        <td>{{ pedido.fecha_creacion}}</td>
+        <td>{{ pedido.estado}}</td>
+
+        <td>
+          <button class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editProducto" >
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-danger"><i class="fas fa-trash" ></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  
