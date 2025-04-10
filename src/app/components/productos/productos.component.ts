@@ -50,7 +50,7 @@ export class ProductosComponent {
       
       toggleForm(): void {
         this.showForm = !this.showForm;
-        this.textoModal = "Nuevo cliente";
+        this.textoModal = "Nuevo producto";
         this.isEditMode = false;
         this.selectedProducto = null;
         /* con reset vamos a hacer que el formulario quede en limpio */
@@ -68,7 +68,7 @@ export class ProductosComponent {
         const productoData: Producto = this.productosForm.value;
         
         /* console.log("validar guardar", this.crearCliente) */
-        console.log("guardar crearCliente", productoData)
+        console.log("guardar producto ", productoData)
         if (this.isEditMode) {
           this.ProductoService.updateProducto(productoData).subscribe({
             next: (updateProducto) => {
@@ -78,7 +78,7 @@ export class ProductosComponent {
               }
               Swal.fire({
                 title: updateProducto.nombre + " actualizada",
-                text: "El cliente fue actualizado exitosamente",
+                text: "El producto fue actualizado exitosamente",
                 icon: "success"
               });
               
@@ -90,8 +90,8 @@ export class ProductosComponent {
           this.ProductoService.createProducto(productoData).subscribe({
             next: (newProducto) => {
               Swal.fire({
-                title: "Cliente" + newProducto.nombre + " creada",
-                text: "El cliente fue creada exitosamente",
+                title: "Producto " + newProducto.nombre + " creada",
+                text: "El producto fue creada exitosamente",
                 icon: "success"
                 });
                 this.productos.push(newProducto);
