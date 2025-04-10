@@ -25,7 +25,8 @@
         <td>{{ pedido.idProductos}}</td>
         <td>{{ pedido.total}}</td>
         <td>{{ pedido.fechaCreacion}}</td>
-        <td class="text-danger">{{ pedido.estado}}</td>
+        <!-- Dynamic Color Status -->
+        <td [class]="estadoStyle(pedido.estado)">{{ estadoToString(pedido.estado) }}</td>
 
         <td>
           <button class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editProducto" >
