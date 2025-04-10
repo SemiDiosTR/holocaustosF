@@ -8,7 +8,7 @@ import { ClientesComponent } from './components/clientes/clientes.components';
 import { ProductosComponent } from './components/productos/productos.component';
 import { ReactiveFormsModule } from '@angular/forms';  
 import { provideHttpClient } from '@angular/common/http';
-import { PedidiosComponent } from './components/pedidios/pedidios.component';
+import { PedidosComponent } from './components/pedidos/pedidos.component';
 
 /* import { MatTableModule } from '@angular/material/table';  */
 
@@ -21,7 +21,7 @@ import { PedidiosComponent } from './components/pedidios/pedidios.component';
     ClientesComponent,
     ProductosComponent,
     NavbarComponent,
-    PedidiosComponent,
+    PedidosComponent,
     
   ],
   imports: [

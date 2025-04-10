@@ -6,12 +6,12 @@ import { PedidosService } from 'src/app/services/pedidos.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-pedidios',
-  templateUrl: './pedidios.component.html',
-  styleUrls: ['./pedidios.component.css']
+  selector: 'app-pedidos',
+  templateUrl: './pedidos.component.html',
+  styleUrls: ['./pedidos.component.css']
 })
 
-export class PedidiosComponent {
+export class PedidosComponent {
   pedidos: Pedidos[]=[];
   pedidosForm: FormGroup;
   showForm: boolean = false;
