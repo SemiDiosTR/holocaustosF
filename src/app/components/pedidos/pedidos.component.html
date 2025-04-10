@@ -14,17 +14,18 @@
         <th>Total</th>
         <th>Fecha de creacion</th>
         <th>Estado</th><!--  estado: pediente, enviado, entregado, cancelado -->
+        <th>Acciones</th>
       </tr>
     </thead>
 
     <tbody>
       <tr *ngFor="let pedido of pedidos; let i =index" style="text-align: center;" >
         <td>{{i+1}}</td>
-        <td>{{ pedido.cliente}}</td>
-        <td>{{ pedido.lista_producto}}</td>
+        <td>{{ pedido.idCliente}}</td>
+        <td>{{ pedido.idProductos}}</td>
         <td>{{ pedido.total}}</td>
-        <td>{{ pedido.fecha_creacion}}</td>
-        <td>{{ pedido.estado}}</td>
+        <td>{{ pedido.fechaCreacion}}</td>
+        <td class="text-danger">{{ pedido.estado}}</td>
 
         <td>
           <button class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editProducto" >

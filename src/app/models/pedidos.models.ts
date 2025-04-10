@@ -1,8 +1,12 @@
+import { Clientes } from 'src/app/models/clientes.model';
+
+
+
 export interface Pedidos{
     idPedido: number | null;
-    cliente: string;
-    lista_producto: string;
+    idCliente: String | null;
+    idProductos: String;
     total: String;
-    fecha_creacion: string;
+    fechaCreacion: string;
     estado: string;
 }

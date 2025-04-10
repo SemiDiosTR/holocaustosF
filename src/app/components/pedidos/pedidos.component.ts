@@ -55,6 +55,15 @@ toggleForm(): void{
   this.pedidosForm.reset();
 }
 
+/* ESTATUS STYLE */
+estadoStyle(): void{
+  this.showForm = !this.showForm;
+  this.textoModal = "Nuevo pedido";
+  this.isEditMode = false;
+  this.selectedPedido = null;
+  this.pedidosForm.reset();
+}
+
 crearPedidos(): void{
   if(this.pedidosForm.invalid){
     return;
@@ -71,7 +80,7 @@ crearPedidos(): void{
           this.pedidos[index] = updatePedido;
         }
         Swal.fire({
-          title: updatePedido.lista_producto + "actualizada",
+          title: updatePedido.idProductos + "actualizada",
           text: "el pedido fue actualizado exitosamente",
           icon:"success"
         })
